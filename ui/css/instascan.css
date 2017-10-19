@@ -1,0 +1,61 @@
+/*
+ * Copyright 2017 Minebox IT Services GmbH
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * Various tools around backups, mostly to get info about them.
+ */
+
+#instascan-box {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	transition: all ease .3s;
+	-webkit-transition: all ease .3s;
+	-moz-transition: all ease .3s;
+	-o-transition: all ease .3s;
+	opacity: 0;
+	z-index: -1000;
+}
+#instascan-box.active {
+	opacity: 1;
+	z-index: 100000;
+}
+
+#instascan-container {
+	width: 60%;
+	height: 60%;
+	max-width: 640px;
+	max-height: 420px;
+	transform: translateX(-50%) translateY(-50%);
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	-moz-transform: translateX(-50%) translateY(-50%);
+	-o-transform: translateX(-50%) translateY(-50%);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	overflow: hidden;
+}
+
+#instascan-video {
+	width: 100%;
+	height: 100%;
+	top: -12%; /* hidding white blood on top */
+	position: relative;
+}
+
+#close-instascan-button {
+	top: 15px;
+	right: 15px;
+}

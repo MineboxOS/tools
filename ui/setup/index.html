@@ -1,0 +1,472 @@
+<!doctype html>
+<!--
+  ~ Copyright 2017 Minebox IT Services GmbH
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~ Various tools around backups, mostly to get info about them.
+  -->
+
+<html>
+
+	<head>
+		<meta charset="utf_8" />
+
+		<!-- generic css -->
+		<link href="../css/heebo.css" type="text/css" rel="stylesheet" />
+		<link href="../css/open-iconic.min.css" type="text/css" rel="stylesheet" />
+		<link href="../css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+		<link href="../css/base.css" type="text/css" rel="stylesheet" />
+		<link href="../css/type.css" type="text/css" rel="stylesheet" />
+		<link href="../css/form.css" type="text/css" rel="stylesheet" />
+		<link href="../css/notify.css" type="text/css" rel="stylesheet" />
+		<link href="../css/instascan.css" type="text/css" rel="stylesheet" />
+		<link href="../css/loadingWitness.css" type="text/css" rel="stylesheet" />
+		<link href="../css/colors-theme-geek-blue.css" type="text/css" rel="stylesheet" />
+		
+
+		<!-- setup specific css -->
+		<link href="css/setup.css" type="text/css" rel="stylesheet" />
+
+		<title>Minebox Setup</title>
+	</head>
+
+	<body id="setup-page">
+
+
+		<section class="welcome-section navigation-tab" data-tab="welcome">
+			<div class="container">
+				<img src="../assets/images/logo/minebox-logo-white.png" class="logo" />
+				<p>Welcome to your Minebox device</p>
+				<div class="choices row">
+					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-md-offset-2 col-lg-offset-3">
+						<button class="button register-button navigation-button" data-go="register">Create encryption key</button>
+						<p>This is my first Minebox device</p>
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+						<button class="button recover-button navigation-button" data-go="recover">Enter existing encryption key</button>
+						<p>I have had a Minebox device before</p>
+					</div>
+				</div>
+		</section>
+
+
+
+
+
+
+
+		<section class="register-section navigation-tab" data-tab="register">
+			<div class="container">
+				<img src="../assets/images/logo/minebox-logo-white.png" class="logo" />
+				<p>Please provide the following information for setting up your device</p>
+
+				<div class="form clearfix">
+					<div class="col-xs-12 col-sm-8 col-md-6 col-lg-6 col-sm-offset-2 col-md-offset-3 col-lg-offset-3">
+
+						<fieldset class="hostname">
+							<h4>Name your Minebox</h4>
+							<p>Your server will be accessible from anywhere using the registered hostname. Only a-z and 0-9 characters allowed.</p>
+							<div class="hostname-block">
+								<input type="text" class="register-hostname" placeholder="Hostname" required="required" />
+								<span class="permanent">.local</span>
+								<div class="hostname-validation">
+									<span class="oi validated" data-glyph="check"></span>
+									<span class="oi not-validated" data-glyph="ban"></span>
+								</div>
+								<div class="hostname-loading">
+									<span class="oi" data-glyph="reload"></span>
+								</div>
+							</div>
+							<p class="hostname-response"></p>
+						</fieldset>
+
+
+						<fieldset class="username">
+							<h4>Set a username & password</h4>
+							<p>In order to keep your files protected and secure, please provide your access credentials.</p>
+
+							<div class="group">
+								<p>Set your username</p>
+								<input type="text" class="register-username" placeholder="Username" required="required" />
+							</div>
+
+							<div class="group">
+								<p>Set your password</p>
+								<span class="password-validation-checker password-input">
+									<span class="oi validated" data-glyph="check"></span>
+									<span class="oi not-validated" data-glyph="ban"></span>
+								</span>
+								<input type="password" class="register-password" placeholder="Password" required="required" />
+							</div>
+
+							<div class="group password-resume">
+								<p>Password strength: <span class="password-strength">Low</span></p>
+								<div class="password-strength-witness"><div class="password-strength-bar"></div></div>
+							</div>
+
+							<div class="group">
+								<p>Repeat your password</p>
+								<span class="password-validation-checker repeat-password-input">
+									<span class="oi validated" data-glyph="check"></span>
+									<span class="oi not-validated" data-glyph="ban"></span>
+								</span>
+								<input type="password" class="register-password-repeat" placeholder="Repeat your password" required="required" />
+							</div>
+							
+						</fieldset>
+
+
+						<fieldset class="encryption">
+							<h4>Your encryption key</h4>
+							<p>The following words are the seed of your encryption key, write them down on a secure place or memorize them. In case of disaster you will be able to recover all of your data by just providing this twelve words.</p>
+							<p>You can <span class="key-generator in-text-button">generate</span> new encryption keys.</p>
+							
+							<div class="row">
+								<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 encryption-box">
+									<label class="encryption-word-number">1.</label>
+									<input type="text" class="encryption-word encryption-word-one" readonly required="required" />
+								</div>
+								<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 encryption-box">
+									<label class="encryption-word-number">2.</label>
+									<input type="text" class="encryption-word encryption-word-two" readonly required="required" />
+								</div>
+								<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 encryption-box">
+									<label class="encryption-word-number">3.</label>
+									<input type="text" class="encryption-word encryption-word-three" readonly required="required" />
+								</div>
+								<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 encryption-box">
+									<label class="encryption-word-number">4.</label>
+									<input type="text" class="encryption-word encryption-word-four" readonly required="required" />
+								</div>
+								<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 encryption-box">
+									<label class="encryption-word-number">5.</label>
+									<input type="text" class="encryption-word encryption-word-five" readonly required="required" />
+								</div>
+								<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 encryption-box">
+									<label class="encryption-word-number">6.</label>
+									<input type="text" class="encryption-word encryption-word-six" readonly required="required" />
+								</div>
+								<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 encryption-box">
+									<label class="encryption-word-number">7.</label>
+									<input type="text" class="encryption-word encryption-word-seven" readonly required="required" />
+								</div>
+								<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 encryption-box">
+									<label class="encryption-word-number">8.</label>
+									<input type="text" class="encryption-word encryption-word-eight" readonly required="required" />
+								</div>
+								<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 encryption-box">
+									<label class="encryption-word-number">9.</label>
+									<input type="text" class="encryption-word encryption-word-nine" readonly required="required" />
+								</div>
+								<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 encryption-box">
+									<label class="encryption-word-number">10.</label>
+									<input type="text" class="encryption-word encryption-word-ten" readonly required="required" />
+								</div>
+								<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 encryption-box">
+									<label class="encryption-word-number">11.</label>
+									<input type="text" class="encryption-word encryption-word-eleven" readonly required="required" />
+								</div>
+								<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 encryption-box">
+									<label class="encryption-word-number">12.</label>
+									<input type="text" class="encryption-word encryption-word-twelve" readonly required="required" />
+								</div>
+								<input type="hidden" id="encryption-key-string" required="required" />
+							</div>
+						</fieldset>
+
+						<fieldset>
+							<p>We highly recommend you to print your encryption key QR code and store it somewhere safe. A new page will open automatically, you can follow the instructions in there to print your QR code.</p>
+							<p>Once you have printed your QR code, you will be able to click on <em>Initialize my Minebox</em> button and then you will have to prove the validity of your QR code and also the validity of the twelve words.</p>
+							<button id="print-encryption-key-qr-code" class="button">Print</button>
+						</fieldset>
+
+						<fieldset>
+							<button class="button back-button navigation-button" data-go="welcome">Cancel</button>
+							<button id="register-minebox-button" class="button navigation-button" data-go="prove" data-disabled="disabled">Initialize my Minebox</button>
+							<p class="error"></p>
+						</fieldset>
+					</div>
+				</div>
+			</div>
+		</section>
+
+
+
+
+
+
+
+		<section class="recover-section navigation-tab" data-tab="recover">
+			<div class="container">
+				<img src="../assets/images/logo/minebox-logo-white.png" class="logo" />
+				<p>Restore your data from your Minebox device</p>
+
+				<div class="form clearfix">
+					<div class="col-xs-12 col-sm-8 col-md-6 col-lg-6 col-sm-offset-2 col-md-offset-3 col-lg-offset-3">
+
+						<fieldset class="caption">
+							<h4>Provide your encryption key</h4>
+							<p>If your device has a camera and you still have your encryption key's QR code, you can scan it. Otherwise you should provide manually your encryption key.</p>
+							<button id="scan-encryption-key-qr-code-button" class="webcam-access-button button">Scan QR code</button>
+							<button id="type-encryption-key" class="button">Type encryption key</button>
+						</fieldset>
+
+						<fieldset class="restore-encryption-key" style="display:none">
+							<h4>Insert your encryption key</h4>
+							<p>When you first configured your Minebox, you got a collection of twelve words which were the seed of your encryption key. Please fill the following fields with your seed. The order is important.</p>
+
+							<div class="row insert-keys-block">
+								<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+									<div class="encryption-box">
+										<label class="encryption-word-number">1.</label>
+										<input type="text" class="encryption-word encryption-word-one" placeholder="Enter word number one" required="required" />
+									</div>
+									<div class="encryption-box">
+										<label class="encryption-word-number">2.</label>
+										<input type="text" class="encryption-word encryption-word-two" placeholder="Enter word number two" required="required" />
+									</div>
+									<div class="encryption-box">
+										<label class="encryption-word-number">3.</label>
+										<input type="text" class="encryption-word encryption-word-three" placeholder="Enter word number three" required="required" />
+									</div>
+									<div class="encryption-box">
+										<label class="encryption-word-number">4.</label>
+										<input type="text" class="encryption-word encryption-word-four" placeholder="Enter word number four" required="required" />
+									</div>
+									<div class="encryption-box">
+										<label class="encryption-word-number">5.</label>
+										<input type="text" class="encryption-word encryption-word-five" placeholder="Enter word number five" required="required" />
+									</div>
+									<div class="encryption-box">
+										<label class="encryption-word-number">6.</label>
+										<input type="text" class="encryption-word encryption-word-six" placeholder="Enter word number six" required="required" />
+									</div>
+									<div class="encryption-box">
+										<label class="encryption-word-number">7.</label>
+										<input type="text" class="encryption-word encryption-word-seven" placeholder="Enter word number seven" required="required" />
+									</div>
+									<div class="encryption-box">
+										<label class="encryption-word-number">8.</label>
+										<input type="text" class="encryption-word encryption-word-eight" placeholder="Enter word number eight" required="required" />
+									</div>
+									<div class="encryption-box">
+										<label class="encryption-word-number">9.</label>
+										<input type="text" class="encryption-word encryption-word-nine" placeholder="Enter word number nine" required="required" />
+									</div>
+									<div class="encryption-box">
+										<label class="encryption-word-number">10.</label>
+										<input type="text" class="encryption-word encryption-word-ten" placeholder="Enter word number ten" required="required" />
+									</div>
+									<div class="encryption-box">
+										<label class="encryption-word-number">11.</label>
+										<input type="text" class="encryption-word encryption-word-eleven" placeholder="Enter word number eleven" required="required" />
+									</div>
+									<div class="encryption-box">
+										<label class="encryption-word-number">12.</label>
+										<input type="text" class="encryption-word encryption-word-twelve" placeholder="Enter word number twelve" required="required" />
+									</div>
+									<p id="encryption-key-validation-response"></p>
+								</div>
+							</div>
+
+						</fieldset>
+
+
+						<fieldset>
+
+							<p class="error"></p>
+
+							<button class="button back-button navigation-button" data-go="welcome">Cancel</button>
+							<button id="restore-minebox-button" class="button progress-button" data-disabled="disabled">Restore my Minebox</button>
+						</fieldset>
+					</div>
+				</div>
+			</div>
+		</section>
+
+
+
+
+
+
+
+		<section class="prove-section navigation-tab" data-tab="prove">
+			<div class="container">
+
+				<div class="form clearfix">
+					<div class="col-xs-12 col-sm-8 col-md-6 col-lg-6 col-sm-offset-2 col-md-offset-3 col-lg-offset-3">
+						<fieldset class="header">
+							<img src="../assets/images/logo/minebox-logo-white.png" class="logo" />
+							<p>Your Minebox is almost ready.</p>
+							<p>Before proceeding please confirm that you have printed your QR code and noted the twelve words. If you haven't printed your QR code before, please consider <a id="print-encryption-key-qr-code-reminder" class="in-text-button">printing it</a> now.</p>
+						</fieldset>
+
+						<fieldset>
+							<p>Please validate your private encryption key</p>
+							<button id="scan-encryption-key-qr-code-button" class="webcam-access-button button">Scan QR code</button>
+							<button class="button type-encryption-key-button">Type encryption key</button>
+						</fieldset>
+
+						<fieldset class="restore-encryption-key" style="display:none">
+							<h4>Insert your encryption key</h4>
+							<p>When you first configured your Minebox, you got a collection of twelve words which were the seed of your encryption key. Please fill the following fields with your seed. The order is important.</p>
+
+							<div class="row insert-keys-block">
+								<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+									<div class="encryption-box">
+										<label class="encryption-word-number">1.</label>
+										<input type="text" class="encryption-word encryption-word-one" placeholder="Enter word number one" required="required" />
+									</div>
+									<div class="encryption-box">
+										<label class="encryption-word-number">2.</label>
+										<input type="text" class="encryption-word encryption-word-two" placeholder="Enter word number two" required="required" />
+									</div>
+									<div class="encryption-box">
+										<label class="encryption-word-number">3.</label>
+										<input type="text" class="encryption-word encryption-word-three" placeholder="Enter word number three" required="required" />
+									</div>
+									<div class="encryption-box">
+										<label class="encryption-word-number">4.</label>
+										<input type="text" class="encryption-word encryption-word-four" placeholder="Enter word number four" required="required" />
+									</div>
+									<div class="encryption-box">
+										<label class="encryption-word-number">5.</label>
+										<input type="text" class="encryption-word encryption-word-five" placeholder="Enter word number five" required="required" />
+									</div>
+									<div class="encryption-box">
+										<label class="encryption-word-number">6.</label>
+										<input type="text" class="encryption-word encryption-word-six" placeholder="Enter word number six" required="required" />
+									</div>
+									<div class="encryption-box">
+										<label class="encryption-word-number">7.</label>
+										<input type="text" class="encryption-word encryption-word-seven" placeholder="Enter word number seven" required="required" />
+									</div>
+									<div class="encryption-box">
+										<label class="encryption-word-number">8.</label>
+										<input type="text" class="encryption-word encryption-word-eight" placeholder="Enter word number eight" required="required" />
+									</div>
+									<div class="encryption-box">
+										<label class="encryption-word-number">9.</label>
+										<input type="text" class="encryption-word encryption-word-nine" placeholder="Enter word number nine" required="required" />
+									</div>
+									<div class="encryption-box">
+										<label class="encryption-word-number">10.</label>
+										<input type="text" class="encryption-word encryption-word-ten" placeholder="Enter word number ten" required="required" />
+									</div>
+									<div class="encryption-box">
+										<label class="encryption-word-number">11.</label>
+										<input type="text" class="encryption-word encryption-word-eleven" placeholder="Enter word number eleven" required="required" />
+									</div>
+									<div class="encryption-box">
+										<label class="encryption-word-number">12.</label>
+										<input type="text" class="encryption-word encryption-word-twelve" placeholder="Enter word number twelve" required="required" />
+									</div>
+								</div>
+							</div>
+						</fieldset>
+
+						<fieldset>
+							<button class="button back-button navigation-button" data-go="register">Cancel</button>
+							<button id="proved-private-key-button" class="button" data-disabled="disabled">Accept</button>
+							<p class="error"></p>
+						</fieldset>
+
+					</div>
+				</div>
+			</div>
+		</section>
+
+
+
+
+
+
+
+		<div id="progress-screen">
+			<div id="loading-space"></div>
+			<img src="../assets/images/minebox-device/minebox-device.png" id="minebox-device" />
+			<h1>Your Minebox is being set up</h1>
+			<p>Please be patient as it might take several minutes.</p>
+			<div id="progress-bar-box">
+				<div id="progress-bar"></div>
+			</div>
+			<ul id="boot-log">
+				<li><input type="checkbox" data-disabled="disabled" />Installing xOS</li>
+				<li><input type="checkbox" data-disabled="disabled" />Restoring your backup</li>
+				<li><input type="checkbox" data-disabled="disabled" />Installing Plugins</li>
+				<li><input type="checkbox" data-disabled="disabled" />Logging you in</li>
+			</ul>
+			<div id="result">
+				<!-- Filled via js -->
+			</div>
+		</div>
+
+
+
+
+
+
+		<div id="instascan-box">
+			<div id="close-instascan-button"></div>
+			<div id="instascan-container">
+				<video id="instascan-video"></video>
+			</div>
+		</div>
+
+
+
+
+		<div id="loading-witness"></div>
+
+
+
+		<!-- generic scripts -->
+		<script type="text/javascript" src="../js/jquery.2.2.4.min.js"></script>
+		<script type="text/javascript" src="../js/func.lib.js"></script>
+		<script type="text/javascript" src="../js/js.cookie.js"></script>
+		<script type="text/javascript" src="../js/config.js"></script>
+		<script type="text/javascript" src="../js/jquery.notify.js"></script>
+		<script type="text/javascript" src="../js/https.js"></script>
+		<script type="text/javascript" src="../js/jquery.requester.js"></script>
+		<script type="text/javascript" src="../js/passwordCheck.js"></script>
+		<script type="text/javascript" src="../js/hashManager.js"></script>
+		<script type="text/javascript" src="../js/loadingWitness.js"></script>
+		<script type="text/javascript" src="../js/tabNavigator.js"></script>
+		<script type="text/javascript" src="../js/instascan.min.js"></script>
+		<script type="text/javascript" src="../js/instascan.js"></script>
+		<script type="text/javascript" src="../js/qrcode.min.js"></script>
+
+		<!-- setup specific scripts -->
+		<script type="text/javascript" src="js/loadingSpaceAnimation.js"></script>
+		<script type="text/javascript" src="js/recoverTab.js"></script>
+		<script type="text/javascript" src="js/registerTab.js"></script>
+		<script type="text/javascript" src="js/proveTab.js"></script>
+		<script type="text/javascript" src="js/setup.js"></script>
+		<script type="text/javascript" src="js/progressScreen.js"></script>
+		<script type="text/javascript" src="js/rockstorUI.js"></script>
+		<script type="text/javascript">
+			//global var to store register seed and hostname and recover it in 'print private key' page
+			var register = {};
+
+			//tav navigation
+			var tabNavigator = new TabNavigator({
+				buttons: $('.navigation-button'),
+				tabs: $('.navigation-tab'),
+				defaultTab: 'welcome'
+			});
+
+			Setup();
+		</script>
+	</body>
+
+</html>

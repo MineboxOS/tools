@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!--
+  ~ Copyright 2017 Minebox IT Services GmbH
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~ Various tools around backups, mostly to get info about them.
+  -->
+
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Minebox Test</title>
+  <script src="test.js"></script>
+</head>
+<body>
+
+<h1>Minebox Test</h1>
+
+<ul>
+<li>Status: <span id="status"></span></li>
+<li>Sia daemon <span id="siad"></span></li>
+<li>Consensus synced: <span id="csync"></span></li>
+<li>Consensus height: <span id="cheight"></span></li>
+<li>Wallet unlocked: <span id="wunlocked"></span></li>
+<li>Wallet balance: <span id="wbalance"></span></li>
+<li>Active user: <span id="user"></span></li>
+</ul>
+
+<button type="button" id="keybtn">Send Key</button>
+<p id="keyoutput"></p>
+
+<button type="button" id="setupbtn">Setup</button>
+<p id="setupoutput"></p>
+
+<button type="button" id="backupbtn">Start Backup</button>
+<p id="backupoutput"></p>
+
+</body>

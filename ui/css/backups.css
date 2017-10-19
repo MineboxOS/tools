@@ -1,0 +1,469 @@
+/*
+ * Copyright 2017 Minebox IT Services GmbH
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * Various tools around backups, mostly to get info about them.
+ */
+
+#backup {
+
+}
+
+#backup-app {
+  position: fixed;
+  top: 36px; /* header's height */
+  left: 0;
+  width: 100%;
+  height: calc(100% - 36px); /* header's height */
+}
+
+
+
+
+
+
+
+
+/* panel */
+#panel {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 120px;
+  height: 30px;
+  z-index: 1000;
+}
+  .panel-button {
+    appearance: none;
+    -webkit-appearance: none;
+    display: block;
+    position: absolute;
+    cursor: pointer;
+    width: 30px;
+    min-width: 0;
+    height: 30px;
+    margin: 0;
+    padding: 0;
+    transition: all ease .3s;
+    -webkit-transition: all ease .3s;
+    -moz-transition: all ease .3s;
+    -o-transition: all ease .3s;
+    border-width: 1px !important;
+    border-style: solid;
+  }
+  .panel-button.active {
+    border-width: 2px;
+    outline: 0;
+  }
+  .panel-button:hover {
+    border-width: 2px;
+    outline: 0;
+  }
+  .panel-button:focus {
+    border-width: 2px;
+    outline: 0;
+  }
+  #new-backup-button {
+    position: absolute;
+    top: 0;
+    left: 60px;
+    width: 180px;
+    line-height: 28px;
+    margin: 0;
+    height: 30px;
+    line-height: 30px;
+    font-weight: 400;
+  }
+  #display-size-scale-button {
+    left: 0;
+    top: 0;
+  }
+    #display-size-scale-button:before {
+      content: '';
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      width: 0;
+      height: 80%;
+      margin-left: -1px;
+      border-left: 2px dotted transparent;
+    }
+    #display-size-scale-button:after {
+      content: '';
+      position: absolute;
+      left: 10%;
+      top: 50%;
+      height: 0;
+      width: 80%;
+      margin-top: -1px;
+      border-top: 2px dotted transparent;
+    }
+  #navigator-button {
+    left: 30px;
+    top: 0;
+  }
+    #navigator-button:before {
+      content: '';
+      position: absolute;
+      width: 20%;
+      height: 60%;
+      border: 2px solid transparent;
+      border-left: 0;
+      top: 20%;
+      left: 28%;
+    }
+    #navigator-button:after {
+      content: '';
+      position: absolute;
+      width: 20%;
+      height: 60%;
+      border: 2px solid transparent;
+      border-right: 0;
+      top: 20%;
+      left: 52%;
+    }
+
+
+
+
+
+
+
+/* graph */
+#graph {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc( 100% - 80px ); /* #timeline's height */
+  overflow: hidden;
+  transition: height ease .6s;
+  -webkit-transition: height ease .6s;
+  -moz-transition: height ease .6s;
+  -o-transition: height ease .6s;
+  cursor: crosshair;
+}
+#graph.expand {
+  height: 100%;
+}
+  #graph-inner {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    min-width: 100%;
+    height: calc( 100% - 80px );
+    z-index: 20;
+  }
+    #new-files {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+    }
+    #new-files:before {
+      content: '';
+      width: 100%;
+      height: 1px;
+      position: absolute;
+      top: 100%;
+      left: 0;
+    }
+      #new-files .bar-box {
+      }
+    #cumulative-files {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 50%;
+    }
+      #cumulative-files .bar {
+        bottom: unset;
+        top: 0;
+      }
+  #size-scale {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    height: calc( 100% - 80px );
+    width: 100%;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity ease .3s;
+    -webkit-transition: opacity ease .3s;
+    -moz-transition: opacity ease .3s;
+    -o-transition: opacity ease .3s;
+  }
+  #size-scale.active {
+    opacity: 1;
+  }
+    #size-scale .positive,
+    #size-scale .negative {
+      position: absolute;
+      width: 100%;
+      height: 50%;
+      left: 0;
+    }
+      #size-scale .positive {
+        top: 0;
+      }
+      #size-scale .negative {
+        top: 50%;
+      }
+        #size-scale .size-scale .line {
+          position: absolute;
+          width: 100%;
+          height: 1px;
+          border-top: 1px dashed transparent;
+          left: 0;
+          font-size: 9px;
+          line-height: 10px;
+          padding: 4px;
+        }
+
+
+
+
+
+
+
+
+/* timeline */
+#timeline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  margin-bottom: -80px;
+  transition: margin-bottom ease .6s;
+  -webkit-transition: margin-bottom ease .6s;
+  -moz-transition: margin-bottom ease .6s;
+  -o-transition: margin-bottom ease .6s;
+}
+#timeline.active {
+  margin-bottom: 0;
+}
+  #timeline .window {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 150px;
+    height: 100%;
+    z-index: 100;
+  }
+  #timeline .window:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 3px solid transparent;
+  }
+  #timeline-bars {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 90;
+    padding: 5px 4px;
+  }
+
+
+
+
+
+
+
+
+
+
+/* bar-container and anything related to bars */
+.bar-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+  .bar-box {
+    float: right;
+    display: block;
+    height: 100%;
+    position: relative;
+  }
+    .bar-box .bar {
+      position: absolute;
+      bottom: 0;
+      border: 1px solid transparent;
+      background-color: transparent;
+      transition: all ease .3s;
+      -webkit-transition: all ease .3s;
+      -moz-transition: all ease .3s;
+      -o-transition: all ease .3s;
+    }
+    .bar-box.hover .bar {}
+    .bar-box.active .bar {}
+  .bar-box .info {
+    position: absolute;
+    top: 100%;
+    width: calc(100% - 30px);
+    left: 15px;
+    padding-top: 5px;
+    height: 40px;
+  }
+    .info>p {
+      font-size: 9px;
+      line-height: 11px;
+      margin: 0;
+      opacity: 0.7;
+      transition: all ease .3s;
+      -webkit-transition: all ease .3s;
+      -moz-transition: all ease .3s;
+      -o-transition: all ease .3s;
+      text-align: right;
+    }
+    .bar-box.hover .info>p {
+      opacity: 1;
+    }
+/* bars exceptions */
+#graph .bar-box {
+  width: 90px;
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 100%;
+}
+  #graph .bar {
+    left: 10px;
+    width: calc( 100% - 20px );
+  }
+#timeline .bar-box {
+  width: 10px;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+  #timeline .bar {
+    left: 1px;
+    width: calc( 100% - 2px );
+    border: 0 none transparent;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#backup-data-viewer {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+}
+  #backup-data-viewer .obfuscation-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    cursor: pointer;
+    transition: all ease 1s;
+    -webkit-transition: all ease 1s;
+    -moz-transition: all ease 1s;
+    -o-transition: all ease 1s;
+  }
+  #backup-data-viewer .obfuscation-layer:hover {}
+  #backup-data-viewer .card {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    width: 100%;
+    max-width: 600px;
+    height: 340px;
+    max-height: 100%;
+    padding: 40px;
+    transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -o-transform: translateX(-50%) translateY(-50%);
+    z-index: 2;
+  }
+    #backup-data-viewer span {
+      font: inherit;
+    }
+    #backup-data-viewer h3 {
+      text-align: center;
+      margin: 0;
+    }
+    #backup-data-viewer .logo {
+      width: 260px;
+      display: block;
+      max-width: 80%;
+      margin: 0px auto;
+    }
+    #backup-data-viewer .contents {
+
+    }
+      #backup-data-viewer .progress-bars {
+        margin-bottom: 15px;
+      }
+        #backup-data-viewer .progress-bars>p {
+          margin-top: 15px;
+        }
+        #backup-data-viewer .progress-bar {
+          width: 100%;
+          height: 2px;
+          position: relative;
+        }
+          #backup-data-viewer .progress-bar>.bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            transition: all ease .3s;
+            -webkit-transition: all ease .3s;
+            -moz-transition: all ease .3s;
+            -o-transition: all ease .3s;
+          }
+          #backup-data-viewer .elements-list {
+            list-style: none;
+            margin: 10px 0;
+            padding: 0;
+            text-transform: uppercase;
+          }
+            #backup-data-viewer .elements-list span {
+              display: inline-block;
+              vertical-align: middle;
+              width: 50%;
+            }
+            #backup-data-viewer .elements-list span.value {
+              text-align: right;
+            }
+          #backup-data-viewer .value {
+            opacity: .8;
+            text-transform: uppercase;
+          }

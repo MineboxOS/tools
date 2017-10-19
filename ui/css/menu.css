@@ -1,0 +1,189 @@
+/*
+ * Copyright 2017 Minebox IT Services GmbH
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * Various tools around backups, mostly to get info about them.
+ */
+
+/* HEADER CONTENT */
+#logo-box {
+  height: 36px;
+  position: relative;
+}
+#header-logo {
+  height: 12px;
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+}
+#menu-box {
+  margin: 0;
+  background-color: transparent;
+}
+#menu {
+  margin: 0;
+  padding: 0;
+  float: left;
+}
+#menu li {
+  list-style: none;
+  display: inline-block;
+  padding: 6px 12px;
+  position: relative;
+  cursor: pointer;
+  transition: background ease .2s;
+  -webkit-transition: background ease .2s;
+  -moz-transition: background ease .2s;
+  -o-transition: background ease .2s;
+}
+#menu li>a {
+  font: inherit;
+  text-decoration: none;
+  color: inherit;
+}
+#menu li:after {
+  content: '';
+  width: 100%;
+  height: 4px;
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  transform: scale(0);
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  -o-transform: scale(0);
+  transition: transform ease .3s;
+  -webkit-transition: transform ease .3s;
+  -moz-transition: transform ease .3s;
+  -o-transition: transform ease .3s;
+}
+#menu li.active:after {
+  transform: scale(1);
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -o-transform: scale(1);
+}
+
+
+
+/* MOBILE MENU */
+#mobile-menu {
+  padding: 3px 15px;
+}
+#mobile-menu .mobile-menu {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  float: right;
+  cursor: pointer;
+  overflow: hidden;
+}
+#mobile-menu .mobile-menu .bar {
+  width: 30px;
+  height: 4px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -15px;
+  transition: all ease .3s;
+  -webkit-transition: all ease .3s;
+  -moz-transition: all ease .3s;
+  -o-transition: all ease .3s;
+}
+#mobile-menu .mobile-menu .bar.top {
+  margin-top: -10px;
+}
+#mobile-menu .mobile-menu .bar.center {
+  margin-top: -2px;
+}
+#mobile-menu .mobile-menu .bar.bottom {
+  margin-top: 6px;
+}
+#mobile-menu .mobile-menu.active .bar.top {
+  margin-top: -4px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+}
+#mobile-menu .mobile-menu.active .bar.center {
+  margin-left: 30px;
+  opacity: 0;
+}
+#mobile-menu .mobile-menu.active .bar.bottom {
+  margin-top: -4px;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+}
+@media (max-width: 991px) {
+  #menu-box {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    opacity: 0;
+    transition: all ease 0.5s;
+    -webkit-transition: all ease 0.5s;
+    -moz-transition: all ease 0.5s;
+    -o-transition: all ease 0.5s;
+  }
+  #menu-box.active {
+    display: block !important;
+    opacity: 1;
+    padding: 60px;
+  }
+  #mobile-menu .mobile-menu.active {
+    position: fixed;
+    top: 27px; /* offset().top */
+    right: 15px; /* padding-right from parent */
+    z-index: 1001;
+  }
+  #menu-box.active ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  #menu-box.active li {
+    display: block;
+    font-size: 17px;
+    line-height: 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    position: relative;
+  }
+  #menu-box.active li:before {
+    content: '';
+    font: inherit;
+    font-size: 1.5em;
+    margin-right: 2px;
+  }
+  #menu-box.active li:nth-child(1):before {content: '01.';}
+  #menu-box.active li:nth-child(2):before {content: '02.';}
+  #menu-box.active li:nth-child(3):before {content: '03.';}
+  #menu-box.active li:nth-child(4):before {content: '04.';}
+  #menu-box.active li:nth-child(5):before {content: '05.';}
+  #menu-box.active li:nth-child(6):before {content: '06.';}
+  #menu-box.active li:nth-child(7):before {content: '07.';}
+  #menu-box.active li:nth-child(8):before {content: '08.';}
+  #menu-box.active li:nth-child(9):before {content: '09.';}
+  #menu-box.active li:nth-child(10):before {content: '10.';}
+  #menu-box.active li:nth-child(11):before {content: '11.';}
+}
